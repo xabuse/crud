@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../helpers.php';
 
+// тест
 // данные из $_POST
 $name = $_POST['name'] ?? null;
 $email = $_POST['email'] ?? null;
