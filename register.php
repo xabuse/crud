@@ -24,6 +24,7 @@ require_once __DIR__ . '/src/helpers.php';
                 id="name"
                 name="name"
                 placeholder="Иванов Иван"
+                value="<?php echo old('name') ?>"
             <?php validationErrorAttr('name'); ?>
         >
         <?php if (hasValidationError('name')): ?>
@@ -38,19 +39,12 @@ require_once __DIR__ . '/src/helpers.php';
                 id="email"
                 name="email"
                 placeholder="ivan@areaweb.su"
+                value="<?php echo old('email') ?>"
             <?php validationErrorAttr('email') ?>
         >
         <?php if (hasValidationError('email')): ?>
             <small><?php validationErrorMessage('email'); ?></small>
         <?php endif; ?>
-    </label>
-
-    <label for="avatar">Изображение профиля
-        <input
-                type="file"
-                id="avatar"
-                name="avatar"
-        >
     </label>
 
     <div class="grid">
@@ -79,26 +73,12 @@ require_once __DIR__ . '/src/helpers.php';
         </label>
     </div>
 
-    <fieldset>
-        <label for="terms">
-            <input
-                    type="checkbox"
-                    id="terms"
-                    name="terms"
-            >
-            Я принимаю все условия пользования
-        </label>
-    </fieldset>
-
     <button
             type="submit"
             id="submit"
-            disabled
     >Продолжить
     </button>
 </form>
-
-<?php clearValidation(); ?>
 
 <p>У меня уже есть <a href="/index.php">аккаунт</a></p>
 
