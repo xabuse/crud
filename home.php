@@ -1,22 +1,31 @@
-<!DOCTYPE html>
+<?php
+
+require_once __DIR__ . '/src/helpers.php';
+
+chechAuth();
+
+$user = currentUser();
+
+?>
+
+<!doctype html>
 <html lang="ru" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <title>AreaWeb - авторизация и регистрация</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <link rel="stylesheet" href="assets/app.css">
+    <title>Document</title>
 </head>
 <body>
 
-<div class="card home">
-    <img
-            class="avatar"
-            src="https://img.gazeta.ru/files3/516/15017516/upload-GettyImages-1166522079-pic_32ratio_900x600-900x600-58937.jpg"
-            alt="{{ name }}"
-    >
-    <h1>Привет, {{ name }}!</h1>
-    <a href="#" role="button">Выйти из аккаунта</a>
-</div>
+<p>q <?php echo  $user['name']  ?></p>
+
+<form action="src/actions/logout.php" method="post">
+    <button role="button">Выйти из аккаунта</button>
+</form>
 
 <script src="assets/app.js"></script>
 </body>
