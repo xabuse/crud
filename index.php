@@ -6,12 +6,7 @@
 
 <!DOCTYPE html>
 <html lang="ru" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <title>AreaWeb - авторизация и регистрация</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <link rel="stylesheet" href="assets/app.css">
-</head>
+<?php include_once __DIR__ . '/components/head.php' ?>
 <body>
 
 <form class="card" action="src/actions/login.php" method="post">
@@ -30,10 +25,10 @@
                 name="email"
                 placeholder="ivan@areaweb.su"
                 value="<?php echo old('email') ?>"
-            <?php validationErrorAttr('email') ?>
+            <?php echo validationErrorAttr('email') ?>
         >
         <?php if (hasValidationError('email')): ?>
-            <small><?php validationErrorMessage('email'); ?></small>
+            <small><?php echo validationErrorMessage('email'); ?></small>
         <?php endif; ?>
     </label>
 

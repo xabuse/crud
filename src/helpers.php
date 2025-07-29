@@ -10,7 +10,7 @@ function redirect(string $path)
     die();
 }
 
-function setValidationError(string $fieldName, string $message)
+function setValidationError(string $fieldName, string $message): void
 {
     $_SESSION['validation'][$fieldName] = $message;
 }
@@ -20,19 +20,19 @@ function hasValidationError(string $fieldName): bool
     return isset($_SESSION['validation'][$fieldName]);
 }
 
-function validationErrorAttr(string $fieldName)
+function validationErrorAttr(string $fieldName): string
 {
-    echo isset($_SESSION['validation'][$fieldName]) ? 'aria-invalid="true"' : '';
+    return isset($_SESSION['validation'][$fieldName]) ? 'aria-invalid="true"' : '';
 }
 
-function validationErrorMessage(string $fieldName)
+function validationErrorMessage(string $fieldName): string
 {
     $message = $_SESSION['validation'][$fieldName] ?? '';
     unset($_SESSION['validation'][$fieldName]);
-    echo $message;
+    return $message;
 }
 
-function setOldValue(string $key, mixed $value)
+function setOldValue(string $key, mixed $value): void
 {
     $_SESSION['old'][$key] = $value;
 }
@@ -107,7 +107,7 @@ function logout(): void
 }
 
 // Редирект на главную, когда неавторизированы
-function chechAuth(): void
+function checkAuth(): void
 {
     if (!isset($_SESSION['user']['id'])) {
         redirect('/');
@@ -115,7 +115,7 @@ function chechAuth(): void
 }
 
 // Редирект с логина и регистрации, когда авторизированы
-function checkGuest()
+function checkGuest(): void
 {
     if (isset($_SESSION['user']['id'])) {
         redirect('/home.php');

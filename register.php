@@ -8,12 +8,7 @@ checkGuest();
 
 <!DOCTYPE html>
 <html lang="ru" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <title>AreaWeb - авторизация и регистрация</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <link rel="stylesheet" href="assets/app.css">
-</head>
+<?php include_once __DIR__ . '/components/head.php' ?>
 <body>
 
 <form class="card" action="src/actions/register.php" method="post" enctype="multipart/form-data">
@@ -27,10 +22,10 @@ checkGuest();
                 name="name"
                 placeholder="Иванов Иван"
                 value="<?php echo old('name') ?>"
-            <?php validationErrorAttr('name'); ?>
+            <?php echo validationErrorAttr('name'); ?>
         >
         <?php if (hasValidationError('name')): ?>
-            <small><?php validationErrorMessage('name'); ?></small>
+            <small><?php echo validationErrorMessage('name'); ?></small>
         <?php endif; ?>
     </label>
 
@@ -42,10 +37,10 @@ checkGuest();
                 name="email"
                 placeholder="ivan@areaweb.su"
                 value="<?php echo old('email') ?>"
-            <?php validationErrorAttr('email') ?>
+            <?php echo validationErrorAttr('email') ?>
         >
         <?php if (hasValidationError('email')): ?>
-            <small><?php validationErrorMessage('email'); ?></small>
+            <small><?php echo validationErrorMessage('email'); ?></small>
         <?php endif; ?>
     </label>
 
@@ -57,10 +52,10 @@ checkGuest();
                     id="password"
                     name="password"
                     placeholder="******"
-                <?php validationErrorAttr('password') ?>
+                <?php echo validationErrorAttr('password') ?>
             >
             <?php if (hasValidationError('password')): ?>
-                <small><?php validationErrorMessage('password'); ?></small>
+                <small><?php echo validationErrorMessage('password'); ?></small>
             <?php endif; ?>
         </label>
 
