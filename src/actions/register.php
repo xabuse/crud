@@ -1,6 +1,9 @@
 <?php
 
+require_once __DIR__ . '/../../createDbAndTables.php';
+
 require_once __DIR__ . '/../helpers.php';
+
 
 // данные из $_POST
 $name = $_POST['name'] ?? null;
@@ -32,6 +35,7 @@ if (!empty($_SESSION['validation'])) {
 }
 
 $pdo = getPDO();
+
 
 $query = "INSERT INTO `users` (name, email, password) VALUES (:name, :email, :password)";
 

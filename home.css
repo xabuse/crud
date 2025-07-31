@@ -1,0 +1,19 @@
+body {
+    background-color: #171717;
+    font-family: Jetbrains Mono, monospace;
+}
+
+p {
+    color: #fff;
+}
+
+.card {
+    border: 1px solid #222222;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+
+.container {
+    padding: 15px;
+}
