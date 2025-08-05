@@ -82,7 +82,6 @@ function findUser(string $email): array|bool
     $stmt = $pdo->prepare("SELECT * FROM users WHERE `email` = :email");
     $stmt->execute(['email' => $email]);
     return $stmt->fetch(\PDO::FETCH_ASSOC);
-
 }
 
 function currentUser(): array|false
@@ -122,20 +121,80 @@ function checkGuest(): void
     }
 }
 
+// in timer get timerTime where email==email, if email not in timer: create email and return timerTime where email==email
+function getTimerTime()
+{
+    $pdo = getPDO();
+
+    $email = currentUser()['email'];
+
+    $stmt = $pdo->prepare("SELECT timerTime FROM timer WHERE `email` = :email");
+    $stmt->execute(['email' => $email]);
+    return $stmt->fetch(\PDO::FETCH_ASSOC)['timerTime'];
+}
+
+function getTime()
+{
+    $pdo = getPDO();
+
+    $email = currentUser()['email'];
+
+    $stmt = $pdo->prepare("SELECT timeStart FROM timer WHERE `email` = :email");
+    $stmt->execute(['email' => $email]);
+    return $stmt->fetch(\PDO::FETCH_ASSOC)['timeStart'];
+}
+
+function isPause(): int
+{
+    $pdo = getPDO();
+
+    $email = currentUser()['email'];
+
+    $stmt = $pdo->prepare("SELECT isPause FROM timer WHERE `email` = :email");
+    $stmt->execute(['email' => $email]);
+    return $stmt->fetch(\PDO::FETCH_ASSOC)['isPause'];
+}
+
+function startButton()
+{
+    $pdo = getPDO();
+    $email = currentUser()['email'];
 
 
+    $stmt = $pdo->prepare("
+            REPLACE INTO timer (timeStart, email, isPause, timerTime)
+            VALUES (:timeStart, :email, :isPause, :timerTime)
+        ");
 
-//$conn = new PDO("mysql:host=db", "root", "1234");
-//
-//// Если нет бд crudDb - создать
-//$conn->exec("CREATE DATABASE IF NOT EXISTS crudDB");
-//
-//// Если нет crudDb users - создать
-//$conn->exec("CREATE TABLE IF NOT EXISTS users");
-//
-//"create table users (
-//    id integer auto_increment primary key,
-//    name varchar(255) default null,
-//    email varchar(255) default null unique
-//    password varchar(255));
-//"
+    $stmt->execute(['timeStart' => time(), 'email' => $email, 'isPause' => 0, 'timerTime' => getTimerTime()]);
+}
+
+function pauseButton()
+{
+    $pdo = getPDO();
+    $email = currentUser()['email'];
+
+    $timerTime = getTimerTime() - (time() - getTime());
+
+    $stmt = $pdo->prepare("
+            REPLACE INTO timer (timerTime, email, isPause)
+            VALUES (:timerTime, :email, :isPause)
+        ");
+
+    $stmt->execute(['timerTime' => $timerTime, 'email' => $email, 'isPause' => 1]);
+}
+
+function resetButton()
+{
+    $pdo = getPDO();
+    $email = currentUser()['email'];
+
+    $timerTime = getTimerTime() - (time() - getTime());
+
+    $stmt = $pdo->prepare("
+            REPLACE INTO timer (email, isPause)
+            VALUES (:email, :isPause)
+        ");
+
+    $stmt->execute(['email' => $email, 'isPause' => 1]);
+}
