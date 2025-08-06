@@ -121,6 +121,23 @@ function checkGuest(): void
     }
 }
 
+// Create db entry with email if not here yet.
+function createFirstTimer()
+{
+    $pdo = getPDO();
+    $email = currentUser()['email'];
+    $check = getTimerTime();
+
+    if (empty($check)) {
+        $stmt = $pdo->prepare("
+            INSERT INTO timer (email)
+            VALUES (:email)
+    ");
+        $stmt->execute(['email' => $email]);
+    }
+}
+
+
 // in timer get timerTime where email==email, if email not in timer: create email and return timerTime where email==email
 function getTimerTime()
 {
@@ -130,7 +147,8 @@ function getTimerTime()
 
     $stmt = $pdo->prepare("SELECT timerTime FROM timer WHERE `email` = :email");
     $stmt->execute(['email' => $email]);
-    return $stmt->fetch(\PDO::FETCH_ASSOC)['timerTime'];
+    $result = $stmt->fetch(PDO::FETCH_ASSOC)['timerTime'] ?? '';
+    return $result;
 }
 
 function getTime()
@@ -141,7 +159,8 @@ function getTime()
 
     $stmt = $pdo->prepare("SELECT timeStart FROM timer WHERE `email` = :email");
     $stmt->execute(['email' => $email]);
-    return $stmt->fetch(\PDO::FETCH_ASSOC)['timeStart'];
+
+    return $stmt->fetch(PDO::FETCH_ASSOC)['timeStart'];
 }
 
 function isPause(): int
@@ -159,7 +178,6 @@ function startButton()
 {
     $pdo = getPDO();
     $email = currentUser()['email'];
-
 
     $stmt = $pdo->prepare("
             REPLACE INTO timer (timeStart, email, isPause, timerTime)

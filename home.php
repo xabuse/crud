@@ -3,6 +3,7 @@
 require_once __DIR__ . '/src/helpers.php';
 
 checkAuth();
+createFirstTimer();
 
 $user = currentUser();
 
@@ -26,63 +27,84 @@ $user = currentUser();
 
 <div class="header">
 
-    <?php
-    $pause = isPause();
-    $remainingTime = getTimerTime() - (time() - getTime());
-    $remainingTime = max(0, $remainingTime);
-    $timerTime = getTimerTime();
-    ?>
+    <!--ai code timer-->
+    <div class="timer">
 
-    <p id="countdown">
         <?php
-        if ($pause == 0) {
-            echo date("H:i:s", $remainingTime);
-        } else {
-            echo date("H:i:s", $timerTime);
-        }
+        $pause = isPause();
+        $remainingTime = getTimerTime() - (time() - getTime());
+        $remainingTime = max(0, $remainingTime);
+        $timerTime = getTimerTime();
         ?>
-    </p>
 
-    <script>
-        const isPaused = <?php echo $pause; ?>;
-
-        if (isPaused === 0) {
-            let remaining = <?php echo $remainingTime; ?>;
-
-            function formatTime(seconds) {
-                const hrs = Math.floor(seconds / 3600);
-                const mins = Math.floor((seconds % 3600) / 60);
-                const secs = seconds % 60;
-                return (
-                    String(hrs).padStart(2, '0') + ':' +
-                    String(mins).padStart(2, '0') + ':' +
-                    String(secs).padStart(2, '0')
-                );
+        <p id="countdown">
+            <?php
+            if ($pause == 0) {
+                echo date("H:i:s", $remainingTime);
+            } else {
+                echo date("H:i:s", $timerTime);
             }
+            ?>
+        </p>
 
-            function updateCountdown() {
-                if (remaining >= 0) {
-                    document.getElementById("countdown").textContent = formatTime(remaining);
-                    remaining--;
+
+        <script>
+            const isPaused = <?php echo $pause; ?>;
+
+            if (isPaused === 0) {
+                let remaining = <?php echo $remainingTime; ?>;
+
+                function formatTime(seconds) {
+                    const hrs = Math.floor(seconds / 3600);
+                    const mins = Math.floor((seconds % 3600) / 60);
+                    const secs = seconds % 60;
+                    return (
+                        String(hrs).padStart(2, '0') + ':' +
+                        String(mins).padStart(2, '0') + ':' +
+                        String(secs).padStart(2, '0')
+                    );
                 }
+
+                function updateCountdown() {
+                    if (remaining >= 0) {
+                        document.getElementById("countdown").textContent = formatTime(remaining);
+                        remaining--;
+                    }
+                }
+
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
             }
+        </script>
 
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-        }
-    </script>
+        <script>
+            document.getElementById("xd").hidden = true;
+        </script>
 
-    <form method="POST" action="/timerButtons.php">
-        <button type="submit" name="action" value="start_timer">Start</button>
-    </form>
+        <form method="POST" action="/timerButtons.php">
+            <button class="btn" id="start" type="submit" name="action" value="start_timer">Start</button>
+        </form>
 
-    <form method="POST" action="/timerButtons.php">
-        <button type="submit" name="action" value="pause_timer">Pause</button>
-    </form>
+        <form method="POST" action="/timerButtons.php">
+            <button class="btn" id="pause" type="submit" name="action" value="pause_timer">Pause</button>
+        </form>
 
-    <form method="POST" action="/timerButtons.php">
-        <button type="submit" name="action" value="reset_timer">Reset</button>
-    </form>
+        <form method="POST" action="/timerButtons.php">
+            <button class="btn" type="submit" name="action" value="reset_timer">Reset</button>
+        </form>
+
+        <script>
+            if (isPaused === 1) {
+                const pause_button = document.getElementById("pause");
+                pause_button.style.visibility = 'hidden';
+            }
+            else if (isPaused === 0) {
+                const start_button = document.getElementById("start");
+                start_button.style.visibility = 'hidden';
+            }
+        </script>
+
+    </div>
 
 </div>
 
