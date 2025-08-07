@@ -5,15 +5,41 @@ body {
 
 p {
     color: #fff;
+    margin: 0;
 }
 
+.p_card {
+    width: 500px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+
+
 .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
     border: 1px solid #222222;
     border-radius: 10px;
-    width: fit-content;
+    height: 100px;
+    width: 555px;
+    word-wrap: break-word;
+}
+
+.card:hover {
+    background-color: #73737335;
 }
 
 .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
     padding: 15px;
 }
 
@@ -30,6 +56,8 @@ p {
     justify-content: center;
 }
 
+/*vibe coding*/
+
 .btn {
     color: #fff;
     font-family: Jetbrains Mono, monospace;
@@ -40,3 +68,30 @@ p {
     cursor: pointer;
     display: inline-block;
 }
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-label .custom-box {
+    display: inline-block;
+    width: 30px;
+    font-size: 15px;
+    text-align: center;
+    font-family: monospace;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    color: #fff
+}
+
+.checkbox-label .custom-box::before {
+    content: "[ ]";
+}
+
+.checkbox-label input[type="checkbox"]:checked + .custom-box::before {
+    content: "[x]";
+}
+
+/*vibe coding*/

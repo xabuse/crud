@@ -50,6 +50,7 @@ $user = currentUser();
 
         <script>
             const isPaused = <?php echo $pause; ?>;
+            const timerTime = <?php echo $timerTime; ?>;
 
             if (isPaused === 0) {
                 let remaining = <?php echo $remainingTime; ?>;
@@ -77,10 +78,6 @@ $user = currentUser();
             }
         </script>
 
-        <script>
-            document.getElementById("xd").hidden = true;
-        </script>
-
         <form method="POST" action="/timerButtons.php">
             <button class="btn" id="start" type="submit" name="action" value="start_timer">Start</button>
         </form>
@@ -94,7 +91,14 @@ $user = currentUser();
         </form>
 
         <script>
-            if (isPaused === 1) {
+            if (timerTime <= 0) {
+                const pause_button = document.getElementById("pause");
+                pause_button.style.visibility = 'hidden';
+
+                const start_button = document.getElementById("start");
+                start_button.style.visibility = 'hidden';
+            }
+            else if (isPaused === 1) {
                 const pause_button = document.getElementById("pause");
                 pause_button.style.visibility = 'hidden';
             }
@@ -108,13 +112,18 @@ $user = currentUser();
 
 </div>
 
-
 <!--main-->
 <div class="card">
     <div class="container">
-        <p>abcdefghijklmnopqrstuvwzyz</p>
+        <p class="p_card">abcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstu</p>
+
+        <label class="checkbox-label">
+            <input type="checkbox" />
+            <span class="custom-box"></span>
+        </label>
     </div>
 </div>
+
 
 </body>
 </html>

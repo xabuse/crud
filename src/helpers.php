@@ -128,7 +128,7 @@ function createFirstTimer()
     $email = currentUser()['email'];
     $check = getTimerTime();
 
-    if (empty($check)) {
+    if (!isset($check)) {
         $stmt = $pdo->prepare("
             INSERT INTO timer (email)
             VALUES (:email)
@@ -193,6 +193,10 @@ function pauseButton()
     $email = currentUser()['email'];
 
     $timerTime = getTimerTime() - (time() - getTime());
+
+    if ($timerTime <= 0) {
+        $timerTime = 0;
+    }
 
     $stmt = $pdo->prepare("
             REPLACE INTO timer (timerTime, email, isPause)
