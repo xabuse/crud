@@ -91,18 +91,10 @@ $user = currentUser();
         </form>
 
         <script>
-            if (timerTime <= 0) {
+            if (isPaused === 1) {
                 const pause_button = document.getElementById("pause");
                 pause_button.style.visibility = 'hidden';
-
-                const start_button = document.getElementById("start");
-                start_button.style.visibility = 'hidden';
-            }
-            else if (isPaused === 1) {
-                const pause_button = document.getElementById("pause");
-                pause_button.style.visibility = 'hidden';
-            }
-            else if (isPaused === 0) {
+            } else if (isPaused === 0) {
                 const start_button = document.getElementById("start");
                 start_button.style.visibility = 'hidden';
             }
@@ -113,12 +105,33 @@ $user = currentUser();
 </div>
 
 <!--main-->
+
+<div class="container">
+    <form method="POST" action="/create_todo.php">
+        <button class="add_btn" id="add" type="submit" name="action" value="add_button">Add</button>
+    </form>
+</div>
+
 <div class="card">
     <div class="container">
-        <p class="p_card">abcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstu</p>
+        <p class="p_card">
+            abcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstu</p>
 
         <label class="checkbox-label">
-            <input type="checkbox" />
+            <input type="checkbox"/>
+            <span class="custom-box"></span>
+        </label>
+    </div>
+</div>
+
+<div class="card">
+    <div class="container">
+        <p class="p_card">
+            abcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstu
+        </p>
+
+        <label class="checkbox-label">
+            <input type="checkbox"/>
             <span class="custom-box"></span>
         </label>
     </div>
