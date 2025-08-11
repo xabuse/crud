@@ -20,22 +20,31 @@ require_once __DIR__ . '/src/helpers.php';
     <div class="test_container">
 
         <form method="POST" action="/">
-            <button class="home_btn" id="home" type="submit" name="action" value="home_button">< Home</button>
+            <button class="btn" id="home" type="submit" name="action" value="home_button">< Home</button>
         </form>
 
         <div class="container">
-
-            <form method="POST" action="">
-                <button class="home_btn" id="home" type="submit" name="action" value="home_button">save</button>
+            <form id="myForm" method="POST" action="/toDoButtons.php">
+                <button class="btn">save</button>
             </form>
-
-
         </div>
 
     </div>
+</div>
 
-    </div>
+<!--main-->
+<div class="container">
+    <p>input date(time-limit):</p>
+    <label>
+        <input type="date" form="myForm" class="date_input" name="date_input">
+    </label>
+</div>
 
+<div class="container_column">
+    <p>input text:</p>
+    <label>
+        <textarea form="myForm" class="text_input" cols="30" rows="10" name="text_input"></textarea>
+    </label>
 </div>
 
 </body>

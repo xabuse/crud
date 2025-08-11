@@ -1,10 +1,12 @@
 <?php
 
+use JetBrains\PhpStorm\NoReturn;
+
 session_start();
 
 require_once __DIR__ . '/config.php';
 
-function redirect(string $path)
+#[NoReturn] function redirect(string $path): void
 {
     header("Location: $path");
     die();
@@ -70,7 +72,7 @@ function getPDO(): PDO
             username: DB_USERNAME,
             password: DB_PASSWORD
         );
-    } catch (\PDOException $e) {
+    } catch (PDOException $e) {
         die($e->getMessage());
     }
 }
@@ -81,7 +83,7 @@ function findUser(string $email): array|bool
 
     $stmt = $pdo->prepare("SELECT * FROM users WHERE `email` = :email");
     $stmt->execute(['email' => $email]);
-    return $stmt->fetch(\PDO::FETCH_ASSOC);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 function currentUser(): array|false
@@ -96,10 +98,10 @@ function currentUser(): array|false
 
     $stmt = $pdo->prepare("SELECT * FROM users WHERE `id` = :id");
     $stmt->execute(['id' => $userId]);
-    return $stmt->fetch(\PDO::FETCH_ASSOC);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-function logout(): void
+#[NoReturn] function logout(): void
 {
     unset($_SESSION['user']['id']);
     redirect('/');
@@ -122,7 +124,7 @@ function checkGuest(): void
 }
 
 // Create db entry with email if not here yet.
-function createFirstTimer()
+function createFirstTimer(): void
 {
     $pdo = getPDO();
     $email = currentUser()['email'];
@@ -147,8 +149,7 @@ function getTimerTime()
 
     $stmt = $pdo->prepare("SELECT timerTime FROM timer WHERE `email` = :email");
     $stmt->execute(['email' => $email]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC)['timerTime'] ?? '';
-    return $result;
+    return $stmt->fetch(PDO::FETCH_ASSOC)['timerTime'] ?? '';
 }
 
 function getTime()
@@ -171,10 +172,10 @@ function isPause(): int
 
     $stmt = $pdo->prepare("SELECT isPause FROM timer WHERE `email` = :email");
     $stmt->execute(['email' => $email]);
-    return $stmt->fetch(\PDO::FETCH_ASSOC)['isPause'];
+    return $stmt->fetch(PDO::FETCH_ASSOC)['isPause'];
 }
 
-function startButton()
+function startButton(): void
 {
     $pdo = getPDO();
     $email = currentUser()['email'];
@@ -187,7 +188,7 @@ function startButton()
     $stmt->execute(['timeStart' => time(), 'email' => $email, 'isPause' => 0, 'timerTime' => getTimerTime()]);
 }
 
-function pauseButton()
+function pauseButton(): void
 {
     $pdo = getPDO();
     $email = currentUser()['email'];
@@ -206,12 +207,10 @@ function pauseButton()
     $stmt->execute(['timerTime' => $timerTime, 'email' => $email, 'isPause' => 1]);
 }
 
-function resetButton()
+function resetButton(): void
 {
     $pdo = getPDO();
     $email = currentUser()['email'];
-
-    $timerTime = getTimerTime() - (time() - getTime());
 
     $stmt = $pdo->prepare("
             REPLACE INTO timer (email, isPause)

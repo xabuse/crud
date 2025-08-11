@@ -21,5 +21,5 @@ $conn->exec('
     email varchar(255) primary key,
     timeStart integer default null,
     timerTime integer default 14400,
-    isPause integer default "1")
+    isPause integer default 1)
 ');

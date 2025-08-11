@@ -43,16 +43,42 @@ p {
     flex-direction: row;
 }
 
+.container_column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .test_container {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
 }
 
-.second {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
+
+.date_input {
+    color: #fff;
+    font-family: Jetbrains Mono, monospace;
+    border: none;
+    background-color: #171717;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.text_input {
+    color: #fff;
+    font-family: Jetbrains Mono, monospace;
+    border: 1px solid #222222;
+    border-radius: 10px;
+    background-color: #171717;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 15px;
+    width: 600px;
+    height: 700px;
 }
 
 .header {
@@ -92,17 +118,6 @@ p {
     cursor: pointer;
     display: inline-block;
     text-align: center;
-}
-
-.home_btn {
-        color: #fff;
-        font-family: Jetbrains Mono, monospace;
-        border: none;
-        background-color: inherit;
-        padding: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        display: inline-block;
 }
 
 .add_btn:hover {
