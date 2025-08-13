@@ -130,7 +130,7 @@ function createFirstTimer(): void
     $email = currentUser()['email'];
     $check = getTimerTime();
 
-    if (!isset($check)) {
+    if (empty($check)) {
         $stmt = $pdo->prepare("
             INSERT INTO timer (email)
             VALUES (:email)
