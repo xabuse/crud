@@ -112,31 +112,56 @@ $user = currentUser();
     </form>
 </div>
 
-<div class="card">
-    <div class="container">
-        <p class="p_card">
-            abcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstu</p>
+<!--<div class="card">-->
+<!--    <div class="container">-->
+<!--        <p class="p_card">-->
+<!--            abcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstu</p>-->
+<!---->
+<!--        <label class="checkbox-label">-->
+<!--            <input type="checkbox"/>-->
+<!--            <span class="custom-box"></span>-->
+<!--        </label>-->
+<!--    </div>-->
+<!--</div>-->
 
-        <label class="checkbox-label">
-            <input type="checkbox"/>
-            <span class="custom-box"></span>
-        </label>
-    </div>
-</div>
+<?php
+$tasks = getTasksFromDB();
 
-<div class="card">
-    <div class="container">
-        <p class="p_card">
-            abcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstu
-        </p>
+if (!$tasks) {
+    echo "
+        <div class='container'>
+            <p>No tasks...</p>
+        </div>
+";
+} else {
 
-        <label class="checkbox-label">
-            <input type="checkbox"/>
-            <span class="custom-box"></span>
-        </label>
-    </div>
-</div>
+    foreach ($tasks as $task) {
+        $description = $task['description'];
 
+        if ($task['is_completed'] == 1) {
+            $checkbox = 'checked';
+        } else {
+            $checkbox = '';
+        }
+
+        echo "
+        <div class='card'>
+            <div class='container'>
+            
+                <p class='p_card'>
+                    $description
+                </p>
+        
+                <label class='checkbox-label'>
+                    <input type='checkbox' $checkbox />
+                    <span class='custom-box'></span>
+                </label>
+            </div>
+        </div>
+        ";
+    }
+}
+?>
 
 </body>
 </html>

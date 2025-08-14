@@ -219,3 +219,26 @@ function resetButton(): void
 
     $stmt->execute(['email' => $email, 'isPause' => 1]);
 }
+
+function saveButton($deadline, $description): void
+{
+    $pdo = getPDO();
+    $email = currentUser()['email'];
+    $stmt = $pdo->prepare("
+        INSERT INTO tasks (email, deadline, description)
+        VALUES (:email, :deadline, :description)       
+    ");
+
+    $stmt->execute(['email' => $email, 'deadline' => $deadline, 'description' => $description]);
+}
+
+function getTasksFromDB()
+{
+    $pdo = getPDO();
+
+    $email = currentUser()['email'];
+
+    $stmt = $pdo->prepare("SELECT * FROM tasks WHERE `email` = :email");
+    $stmt->execute(['email' => $email]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

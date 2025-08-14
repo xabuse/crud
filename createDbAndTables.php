@@ -31,7 +31,7 @@ $conn->exec('
     id integer auto_increment primary key,
     email varchar(255) not null,
     title varchar(255) default null,
-    description varchar(255) default null,
+    description varchar(10000) default null,
     deadline date default null,
     is_completed boolean default false)
 ');
