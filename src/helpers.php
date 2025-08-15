@@ -232,7 +232,7 @@ function saveButton($deadline, $description): void
     $stmt->execute(['email' => $email, 'deadline' => $deadline, 'description' => $description]);
 }
 
-function getTasksFromDB()
+function getTasksFromDB(): array
 {
     $pdo = getPDO();
 
@@ -241,4 +241,19 @@ function getTasksFromDB()
     $stmt = $pdo->prepare("SELECT * FROM tasks WHERE `email` = :email");
     $stmt->execute(['email' => $email]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function editCheckbox($id, $isCheck): void
+{
+    $pdo = getPDO();
+
+    $email = currentUser()['email'];
+
+    $stmt = $pdo->prepare("
+    UPDATE tasks
+    SET is_completed = :is_completed
+    WHERE (email = :email) AND (id = :id)
+    ");
+
+    $stmt->execute(['id' => $id, 'email' => $email, 'is_completed' => $isCheck]);
 }

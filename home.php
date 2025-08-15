@@ -137,6 +137,7 @@ if (!$tasks) {
 
     foreach ($tasks as $task) {
         $description = $task['description'];
+        $id = $task['id'];
 
         if ($task['is_completed'] == 1) {
             $checkbox = 'checked';
@@ -153,7 +154,7 @@ if (!$tasks) {
                 </p>
         
                 <label class='checkbox-label'>
-                    <input type='checkbox' $checkbox />
+                    <input type='checkbox' $checkbox id='$id' onchange='checkboxChanged($id)'/>
                     <span class='custom-box'></span>
                 </label>
             </div>
@@ -162,6 +163,25 @@ if (!$tasks) {
     }
 }
 ?>
+
+<script>
+    function checkboxChanged(id) {
+        const checkbox = document.getElementById(id);
+        if (checkbox.checked) {
+            fetch('checkboxChecker.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'action=checkbox_checked&id=' + id
+            });
+        } else {
+            fetch('checkboxChecker.php', {
+                method: 'POST', 
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'action=checkbox_unchecked&id=' + id
+            });
+        }
+    }
+</script>
 
 </body>
 </html>
