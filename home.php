@@ -104,84 +104,96 @@ $user = currentUser();
 
 </div>
 
-<!--main-->
 
-<div class="container">
-    <form method="POST" action="/create_todo.php">
-        <button class="add_btn" id="add" type="submit" name="action" value="add_button">Add</button>
-    </form>
-</div>
+<main>
+    <div class="container">
+        <form method="POST" action="/create_todo.php">
+            <button class="add_btn" id="add" type="submit" name="action" value="add_button">Add</button>
+        </form>
+    </div>
 
-<!--<div class="card">-->
-<!--    <div class="container">-->
-<!--        <p class="p_card">-->
-<!--            abcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstu</p>-->
-<!---->
-<!--        <label class="checkbox-label">-->
-<!--            <input type="checkbox"/>-->
-<!--            <span class="custom-box"></span>-->
-<!--        </label>-->
-<!--    </div>-->
-<!--</div>-->
+    <!--<div class="card">-->
+    <!--    <div class="container">-->
+    <!--        <p class="p_card">-->
+    <!--            abcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstuvwzyzabcdefghijklmnopqrstu</p>-->
+    <!---->
+    <!--        <label class="checkbox-label">-->
+    <!--            <input type="checkbox"/>-->
+    <!--            <span class="custom-box"></span>-->
+    <!--        </label>-->
+    <!--    </div>-->
+    <!--</div>-->
 
-<?php
-$tasks = getTasksFromDB();
+    <?php
+    $tasks = getTasksFromDB();
 
-if (!$tasks) {
-    echo "
+    if (!$tasks) {
+        echo "
         <div class='container'>
             <p>No tasks...</p>
         </div>
 ";
-} else {
+    } else {
+        foreach ($tasks as $task) {
+            $description = $task['description'];
+            $id = $task['id'];
 
-    foreach ($tasks as $task) {
-        $description = $task['description'];
-        $id = $task['id'];
+            if ($task['is_completed'] == 1) {
+                $checkbox = 'checked';
+            } else {
+                $checkbox = '';
+            }
 
-        if ($task['is_completed'] == 1) {
-            $checkbox = 'checked';
-        } else {
-            $checkbox = '';
-        }
-
-        echo "
-        <div class='card'>
-            <div class='container'>
-            
-                <p class='p_card'>
-                    $description
-                </p>
+            echo "
+        <div class='card' id='card_$id' onclick='submitForm($id)'> 
         
-                <label class='checkbox-label'>
-                    <input type='checkbox' $checkbox id='$id' onchange='checkboxChanged($id)'/>
-                    <span class='custom-box'></span>
-                </label>
+            <form id='form_task_$id' action='src/actions/openTask.php' method='post'>
+                <input type='hidden' value=$id name='task_id'>
+                
+                    <div class='container'>        
+                    
+                        <p class='p_card'>
+                            $description
+                        </p>
+                
+                        <label class='checkbox-label'>
+                            <input type='checkbox' $checkbox id=checkbox_$id onchange='checkboxChanged($id)'/>
+                            <span class='custom-box'></span>
+                        </label>
+                        
+                    </div>
+                    
             </div>
-        </div>
+        </form>
         ";
-    }
-}
-?>
-
-<script>
-    function checkboxChanged(id) {
-        const checkbox = document.getElementById(id);
-        if (checkbox.checked) {
-            fetch('checkboxChecker.php', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: 'action=checkbox_checked&id=' + id
-            });
-        } else {
-            fetch('checkboxChecker.php', {
-                method: 'POST', 
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: 'action=checkbox_unchecked&id=' + id
-            });
         }
     }
-</script>
+    ?>
 
+    <script>
+        function checkboxChanged(id) {
+            const checkbox = document.getElementById('checkbox_' + id);
+            if (checkbox.checked) {
+                fetch('checkboxChecker.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: 'action=checkbox_checked&id=' + id
+                });
+            } else {
+                fetch('checkboxChecker.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: 'action=checkbox_unchecked&id=' + id
+                });
+            }
+        }
+
+
+        function submitForm(id) {
+            document.getElementById("form_task_" + id).submit();
+        }
+    </script>
+
+</main>
 </body>
 </html>
