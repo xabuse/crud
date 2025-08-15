@@ -156,8 +156,8 @@ $user = currentUser();
                             $description
                         </p>
                 
-                        <label class='checkbox-label'>
-                            <input type='checkbox' $checkbox id=checkbox_$id onchange='checkboxChanged($id)'/>
+                        <label class='checkbox-label' onclick='event.stopPropagation()'>
+                            <input type='checkbox' $checkbox id=checkbox_$id onchange='checkboxChanged($id)' />
                             <span class='custom-box'></span>
                         </label>
                         
@@ -172,6 +172,7 @@ $user = currentUser();
 
     <script>
         function checkboxChanged(id) {
+
             const checkbox = document.getElementById('checkbox_' + id);
             if (checkbox.checked) {
                 fetch('checkboxChecker.php', {
