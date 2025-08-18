@@ -257,3 +257,19 @@ function editCheckbox($id, $isCheck): void
 
     $stmt->execute(['id' => $id, 'email' => $email, 'is_completed' => $isCheck]);
 }
+
+function dataFromDbById($id)
+{
+    $pdo = getPDO();
+
+    $email = currentUser()['email'];
+
+    $stmt = $pdo->prepare("
+    SELECT * FROM  tasks
+    WHERE (email = :email) AND (id = :id)
+    ");
+
+    $stmt->execute(['id' => $id, 'email' => $email]);
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}

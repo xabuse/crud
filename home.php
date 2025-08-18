@@ -23,11 +23,9 @@ $user = currentUser();
 
 <body>
 
-<!--header-->
-
 <div class="header">
 
-    <!--ai code timer-->
+<!--ai code timer-->
     <div class="timer">
 
         <?php
@@ -77,6 +75,7 @@ $user = currentUser();
                 setInterval(updateCountdown, 1000);
             }
         </script>
+<!--ai code timer-->
 
         <form method="POST" action="/timerButtons.php">
             <button class="btn" id="start" type="submit" name="action" value="start_timer">Start</button>
@@ -147,7 +146,7 @@ $user = currentUser();
             echo "
         <div class='card' id='card_$id' onclick='submitForm($id)'> 
         
-            <form id='form_task_$id' action='src/actions/openTask.php' method='post'>
+            <form id='form_task_$id' action='openTask.php' method='post'>
                 <input type='hidden' value=$id name='task_id'>
                 
                     <div class='container'>        
