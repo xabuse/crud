@@ -35,23 +35,28 @@ $deadline = dataFromDbById($id)['deadline'] ?? null;
 
         <div class="container">
             <p>time-limit:
+                <label for="date"></label>
+                <!--deadline-->
                 <input
                         type="date"
                         class="date_input"
                         id="date"
-                        name="trip-start"
+                        name="time_limit"
+                        form="task_id_update"
                         value=<?php echo $deadline ?>
                 />
             </p>
         </div>
 
         <div class="container_500_right">
-            <form id="" method="POST" action="">
-                <button class="btn">delete</button>
+            <form id="" method="POST" action="/src/actions/updateToDoButtons.php">
+                <button class="btn" name="task_id_delete" value=<?php echo $id ?>>delete</button>
             </form>
 
-            <form id="" method="POST" action="">
-                <button class="btn">save</button>
+            <form id="task_id_update" method="POST" action="/src/actions/updateToDoButtons.php">
+<!--скрытое поле(с дива в форму не отправляются данные-->
+                <input type="hidden" name="description" id="hiddenDescription">
+                <button class="btn" name="task_id_update" value=<?php echo $id ?>>save</button>
             </form>
         </div>
 
@@ -64,7 +69,10 @@ $deadline = dataFromDbById($id)['deadline'] ?? null;
 
         <?php echo '<p>' . $id . '</p>'; ?>
 
-        <div contenteditable="true" class="inputTextInTask" id="inputTextInTask"><?php echo $description;?></div>
+        <!--description-->
+        <div contenteditable="true" class="inputTextInTask"
+             id="inputTextInTask"><?php echo $description; ?>
+        </div>
     </div>
 
 
@@ -74,11 +82,19 @@ $deadline = dataFromDbById($id)['deadline'] ?? null;
 
 <!--Теперь таб вставляет 4 пробела-->
 <script>
-    document.getElementById("inputTextInTask").addEventListener("keydown", function(e) {
+    document.getElementById("inputTextInTask").addEventListener("keydown", function (e) {
         if (e.key === "Tab") {
             e.preventDefault();
             document.execCommand("insertText", false, "    ");
         }
+    });
+</script>
+
+<!--добавляет скрытому элементу значение дива-->
+<script>
+    document.getElementById("task_id_update").addEventListener("submit", function () {
+        document.getElementById("hiddenDescription").value =
+            document.getElementById("inputTextInTask").innerHTML;
     });
 </script>
 </html>

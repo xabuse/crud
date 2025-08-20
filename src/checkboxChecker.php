@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/src/helpers.php';
+require_once __DIR__ . '/helpers.php';
 
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'checkbox_checked') {

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/createDbAndTables.php';
+require_once __DIR__ . '/src/createDbAndTables.php';
 
 require_once __DIR__ . '/src/helpers.php';
 

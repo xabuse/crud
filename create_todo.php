@@ -24,7 +24,7 @@ require_once __DIR__ . '/src/helpers.php';
         </form>
 
         <div class="container">
-            <form id="myForm" method="POST" action="/toDoButtons.php">
+            <form id="myForm" method="POST" action="/src/actions/createToDoButton.php">
                 <button class="btn">save</button>
             </form>
         </div>

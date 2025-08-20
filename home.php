@@ -77,15 +77,15 @@ $user = currentUser();
         </script>
 <!--ai code timer-->
 
-        <form method="POST" action="/timerButtons.php">
+        <form method="POST" action="/src/actions/timerButtons.php">
             <button class="btn" id="start" type="submit" name="action" value="start_timer">Start</button>
         </form>
 
-        <form method="POST" action="/timerButtons.php">
+        <form method="POST" action="/src/actions/timerButtons.php">
             <button class="btn" id="pause" type="submit" name="action" value="pause_timer">Pause</button>
         </form>
 
-        <form method="POST" action="/timerButtons.php">
+        <form method="POST" action="/src/actions/timerButtons.php">
             <button class="btn" type="submit" name="action" value="reset_timer">Reset</button>
         </form>
 

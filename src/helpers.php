@@ -273,3 +273,22 @@ function dataFromDbById($id)
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+function deleteToDoFromDb($id)
+{
+    $pdo = getPDO();
+
+    $email = currentUser()['email'];
+
+    $stmt = $pdo->prepare("
+    DELETE FROM tasks
+    WHERE (email = :email) AND (id = :id);
+    ");
+
+    $stmt->execute(['id' => $id, 'email' => $email]);
+}
+
+function updateToDoInDb($id, $timelimit, $description)
+{
+    echo $id . "<br>" .  $timelimit . "<br>" . $description;
+}

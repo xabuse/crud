@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/src/helpers.php';
+require_once __DIR__ . '/../helpers.php';
 
 
 // Start button timeStart = start(), pause = 0
