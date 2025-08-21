@@ -288,7 +288,22 @@ function deleteToDoFromDb($id)
     $stmt->execute(['id' => $id, 'email' => $email]);
 }
 
-function updateToDoInDb($id, $timelimit, $description)
+function updateToDoInDb($id, $timeLimit, $description)
 {
-    echo $id . "<br>" .  $timelimit . "<br>" . $description;
+
+    if (isset($timeLimit)) {
+        $timeLimit = null;
+    }
+
+    $pdo = getPDO();
+
+    $email = currentUser()['email'];
+
+    $stmt = $pdo->prepare("
+    UPDATE tasks
+    SET deadline = :timeLimit, description = :description
+    WHERE (email = :email) AND (id = :id)
+    ");
+
+    $stmt->execute(['timeLimit' => $timeLimit, 'description' => $description, 'email' => $email, 'id' => $id]);
 }

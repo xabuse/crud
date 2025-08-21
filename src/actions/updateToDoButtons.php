@@ -14,4 +14,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['task_id_update'])) {
     updateToDoInDb($id, $timeLimit, $description);
 }
 
-//redirect('/home.php');
+redirect('/home.php');
