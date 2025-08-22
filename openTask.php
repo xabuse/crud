@@ -28,7 +28,7 @@ $deadline = dataFromDbById($id)['deadline'] ?? null;
     <div class="test_container">
 
         <div class="container_500_left">
-            <form method="POST" action="/">
+            <form method="POST" action="/home.php">
                 <button class="btn" id="home" type="submit" name="action" value="home_button">< Home</button>
             </form>
         </div>

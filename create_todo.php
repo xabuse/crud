@@ -19,7 +19,7 @@ require_once __DIR__ . '/src/helpers.php';
 <div class="header">
     <div class="test_container">
 
-        <form method="POST" action="/">
+        <form method="POST" action="/home.php">
             <button class="btn" id="home" type="submit" name="action" value="home_button">< Home</button>
         </form>
 

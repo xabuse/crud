@@ -1,59 +1,57 @@
 <?php
 
-    require_once __DIR__ . '/src/createDbAndTables.php';
+require_once __DIR__ . '/src/createDbAndTables.php';
 
-    require_once  __DIR__ . '/src/helpers.php';
+require_once __DIR__ . '/src/helpers.php';
 
-    checkGuest();
+checkGuest();
 ?>
 
-<!DOCTYPE html>
-<html lang="ru" data-theme="light">
-<?php include_once __DIR__ . '/components/head.php' ?>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="home.css">
+</head>
 <body>
 
-<form class="card" action="src/actions/login.php" method="post">
-    <h2>Вход</h2>
+<div class="login_container">
+<form class="" action="src/actions/login.php" method="post">
+    <div class="login_container_column">
 
-    <?php if(hasMessage('error')): ?>
-    <div class="notice error"><?php echo getMessage('error') ?></div>
-    <?php endif; ?>
+        <p>Вход</p>
 
-
-    <label for="email">
-        E-mail
-        <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="ivan@areaweb.su"
-                value="<?php echo old('email') ?>"
-            <?php echo validationErrorAttr('email') ?>
-        >
-        <?php if (hasValidationError('email')): ?>
-            <small><?php echo validationErrorMessage('email'); ?></small>
+        <?php if (hasMessage('error')): ?>
+            <div class="notice error"><p><?php echo getMessage('error') ?></p></div>
         <?php endif; ?>
-    </label>
 
-    <label for="password">
-        Пароль
-        <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="******"
-        >
-    </label>
 
-    <button
-            type="submit"
-            id="submit"
-    >Продолжить
-    </button>
+        <label for="email">E-mail
+            <input class="label_text_input" type="text" id="email" name="email"
+                   value="<?php echo old('email') ?>" <?php echo validationErrorAttr('email') ?>>
+
+            <?php if (hasValidationError('email')): ?>
+                <p><?php echo validationErrorMessage('email'); ?></p>
+            <?php endif; ?>
+
+        </label>
+
+        <label for="password">
+            Пароль
+            <input class="label_text_input" type="password" id="password" name="password">
+        </label>
+
+        <button type="submit" id="submit" class="border_btn_login">Продолжить</button>
+        
+        <p>У меня еще нет <a href="/register.php">аккаунта</a></p>
+    </div>
 </form>
+</div>
 
-<p>У меня еще нет <a href="/register.php">аккаунта</a></p>
-
-<script src="assets/app.js"></script>
 </body>
 </html>

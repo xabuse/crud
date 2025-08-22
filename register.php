@@ -8,79 +8,67 @@ checkGuest();
 
 ?>
 
-<!DOCTYPE html>
-<html lang="ru" data-theme="light">
-<?php include_once __DIR__ . '/components/head.php' ?>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+
 <body>
 
-<form class="card" action="src/actions/register.php" method="post" enctype="multipart/form-data">
-    <h2>Регистрация</h2>
+<div class="login_container">
+<form class="form-group" action="src/actions/register.php" method="post" enctype="multipart/form-data">
+    <div class="login_container_column">
+
+        <p>Регистрация</p>
+
 
     <label for="name">
-        Имя
-        <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Иванов Иван"
-                value="<?php echo old('name') ?>"
-            <?php echo validationErrorAttr('name'); ?>
-        >
+        <p>Имя</p>
+        <input type="text" id="name" class="label_text_input_register" name="name"  value="<?php echo old('name') ?>"
+            <?php echo validationErrorAttr('name'); ?>>
         <?php if (hasValidationError('name')): ?>
-            <small><?php echo validationErrorMessage('name'); ?></small>
+            <p><?php echo validationErrorMessage('name'); ?></p>
         <?php endif; ?>
     </label>
 
     <label for="email">
-        E-mail
-        <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="ivan@areaweb.su"
-                value="<?php echo old('email') ?>"
-            <?php echo validationErrorAttr('email') ?>
-        >
+        <p>E-mail</p>
+        <input type="text" id="email" class="label_text_input_register" name="email"  value="<?php echo old('email') ?>"
+            <?php echo validationErrorAttr('email') ?>>
         <?php if (hasValidationError('email')): ?>
-            <small><?php echo validationErrorMessage('email'); ?></small>
+            <p><?php echo validationErrorMessage('email'); ?></p>
         <?php endif; ?>
     </label>
 
-    <div class="grid">
+
         <label for="password">
-            Пароль
-            <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="******"
-                <?php echo validationErrorAttr('password') ?>
-            >
+            <p>Пароль</p>
+            <input class="label_text_input_register" type="password" id="password" name="password"
+                <?php echo validationErrorAttr('password') ?>>
             <?php if (hasValidationError('password')): ?>
-                <small><?php echo validationErrorMessage('password'); ?></small>
+                <p><?php echo validationErrorMessage('password'); ?></p>
             <?php endif; ?>
         </label>
 
         <label for="password_confirmation">
-            Подтверждение
-            <input
-                    type="password"
-                    id="password_confirmation"
-                    name="password_confirmation"
-                    placeholder="******"
-            >
+            <p>Подтверждение пароля</p>
+            <input type="password" id="password_confirmation" class="label_text_input_register" name="password_confirmation" >
         </label>
-    </div>
 
-    <button
-            type="submit"
-            id="submit"
-    >Продолжить
-    </button>
+
+    <button class="border_btn" type="submit" id="submit">Продолжить</button>
+        <p>У меня уже есть <a href="/index.php">аккаунт</a></p>
+    </div>
 </form>
 
-<p>У меня уже есть <a href="/index.php">аккаунт</a></p>
+</div>
 
-<script src="assets/app.js"></script>
 </body>
 </html>

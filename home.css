@@ -10,9 +10,21 @@ p {
     font-size: 24px;
 }
 
+a {
+    color: #fff;
+}
+
+label {
+    color: #fff;
+    margin: 0;
+    font-size: 24px;
+}
+
 #countdown {
     font-size: 24px;
 }
+
+
 
 .p_card {
     width: 750px;
@@ -75,11 +87,32 @@ p {
     flex-direction: column;
 }
 
+.login_container_column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
+    border: 1px solid #222222;
+    border-radius: 15px;
+}
+
+.login_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+
 .test_container {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
 }
+
 
 .date_input {
     color: #fff;
@@ -111,6 +144,32 @@ p {
     height: 600px;
 }
 
+.label_text_input {
+    color: #fff;
+    font-family: monospace;
+    border: 1px solid #222222;
+    border-radius: 10px;
+    background-color: #171717;
+    padding: 15px;
+    font-size: 24px;
+    margin-top: 22px;
+    width: 400px;
+    height: 10px;
+}
+
+.label_text_input_register {
+    color: #fff;
+    font-family: monospace;
+    border: 1px solid #222222;
+    border-radius: 10px;
+    background-color: #171717;
+    padding: 15px;
+    font-size: 24px;
+    margin-bottom: 15px;
+    width: 400px;
+    height: 10px;
+}
+
 .header {
     text-align: center;
     border-bottom: 1px solid #222222;
@@ -133,6 +192,38 @@ p {
     font-size: 24px;
     cursor: pointer;
     display: inline-block;
+}
+
+.border_btn_login {
+    /*верх - лево+право - низ*/
+    margin: 15px auto 15px;
+    border: 1px solid #222222;
+    border-radius: 15px;
+    width: auto;
+    color: #fff;
+    font-family: monospace;
+    background-color: inherit;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+}
+
+.border_btn {
+    /*отступ снизу*/
+    margin: 0 auto 10px;
+    border: 1px solid #222222;
+    border-radius: 15px;
+    width: auto;
+    color: #fff;
+    font-family: monospace;
+    background-color: inherit;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
 }
 
 .add_btn {

@@ -110,17 +110,17 @@ function currentUser(): array|false
 // Редирект на главную, когда неавторизированы
 function checkAuth(): void
 {
-    if (!isset($_SESSION['user']['id'])) {
-        redirect('/');
-    }
+//    if (!isset($_SESSION['user']['id'])) {
+//        redirect('/');
+//    }
 }
 
 // Редирект с логина и регистрации, когда авторизированы
 function checkGuest(): void
 {
-    if (isset($_SESSION['user']['id'])) {
-        redirect('/home.php');
-    }
+//    if (isset($_SESSION['user']['id'])) {
+//        redirect('/home.php');
+//    }
 }
 
 // Create db entry with email if not here yet.
