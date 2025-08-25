@@ -2,12 +2,12 @@ services:
   app:
     restart: always
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./Dockerfile
     depends_on:
       - db
     volumes:
-      - ./:/var/www/html/
+      - ../:/var/www/html/
     ports:
       - "8080:80"
 

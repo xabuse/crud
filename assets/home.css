@@ -210,6 +210,10 @@ label {
     text-align: center;
 }
 
+.border_btn_login:hover {
+    background-color: #73737335;
+}
+
 .border_btn {
     /*отступ снизу*/
     margin: 0 auto 10px;
@@ -224,6 +228,10 @@ label {
     cursor: pointer;
     display: inline-block;
     text-align: center;
+}
+
+.border_btn:hover {
+    background-color: #73737335;
 }
 
 .add_btn {
