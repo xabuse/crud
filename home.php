@@ -18,7 +18,7 @@ $user = currentUser();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="assets/home.css">
 </head>
 
 <body>
@@ -48,7 +48,6 @@ $user = currentUser();
 
         <script>
             const isPaused = <?php echo $pause; ?>;
-            const timerTime = <?php echo $timerTime; ?>;
 
             if (isPaused === 0) {
                 let remaining = <?php echo $remainingTime; ?>;
@@ -169,30 +168,7 @@ $user = currentUser();
     }
     ?>
 
-    <script>
-        function checkboxChanged(id) {
-
-            const checkbox = document.getElementById('checkbox_' + id);
-            if (checkbox.checked) {
-                fetch('src/checkboxChecker.php', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    body: 'action=checkbox_checked&id=' + id
-                });
-            } else {
-                fetch('src/checkboxChecker.php', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    body: 'action=checkbox_unchecked&id=' + id
-                });
-            }
-        }
-
-
-        function submitForm(id) {
-            document.getElementById("form_task_" + id).submit();
-        }
-    </script>
+    <script src="assets/home.js"></script>
 
 </main>
 </body>

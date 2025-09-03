@@ -20,7 +20,7 @@ $deadline = dataFromDbById($id)['deadline'] ?? null;
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="assets/home.css">
 </head>
 <body>
 
@@ -54,7 +54,7 @@ $deadline = dataFromDbById($id)['deadline'] ?? null;
             </form>
 
             <form id="task_id_update" method="POST" action="/src/actions/updateToDoButtons.php">
-<!--скрытое поле(с дива в форму не отправляются данные-->
+<!--скрытое поле(используется, т.к с дива в форму не отправляются данные-->
                 <input type="hidden" name="description" id="hiddenDescription">
                 <button class="btn" name="task_id_update" value=<?php echo $id ?>>save</button>
             </form>
@@ -81,20 +81,5 @@ $deadline = dataFromDbById($id)['deadline'] ?? null;
 </body>
 
 <!--Теперь таб вставляет 4 пробела-->
-<script>
-    document.getElementById("inputTextInTask").addEventListener("keydown", function (e) {
-        if (e.key === "Tab") {
-            e.preventDefault();
-            document.execCommand("insertText", false, "    ");
-        }
-    });
-</script>
-
-<!--добавляет скрытому элементу значение дива-->
-<script>
-    document.getElementById("task_id_update").addEventListener("submit", function () {
-        document.getElementById("hiddenDescription").value =
-            document.getElementById("inputTextInTask").innerHTML;
-    });
-</script>
+<script src="assets/openTask.js"></script>
 </html>

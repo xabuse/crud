@@ -9,6 +9,10 @@ $email = $_POST['email'] ?? null;
 $password = $_POST['password'] ?? null;
 $passwordConfirmation = $_POST['password_confirmation'] ?? null;
 
+if (findUser($email)) {
+    setValidationError('email', 'Такой email уже зарегистрирован');
+}
+
 // Валидация
 if (empty($name)) {
     setValidationError('name', 'Пустое имя');

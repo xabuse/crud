@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../helpers.php';
 
 
-// Start button timeStart = start(), pause = 0
+// Start button timeStart = start(), isPause = 0
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'start_timer') {
     startButton();
 }
@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'reset_timer')
 }
 
 redirect('/home.php');
-?>
 
 
 

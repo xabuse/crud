@@ -16,9 +16,13 @@ checkGuest();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="assets/home.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
+
 <body>
+
+<div id="particles-js"></div>
 
 <div class="login_container">
 <form class="" action="src/actions/login.php" method="post">
@@ -47,11 +51,13 @@ checkGuest();
         </label>
 
         <button type="submit" id="submit" class="border_btn_login">Продолжить</button>
-        
+
         <p>У меня еще нет <a href="/register.php">аккаунта</a></p>
     </div>
 </form>
 </div>
+
+<script src="assets/particleJS.js"></script>
 
 </body>
 </html>

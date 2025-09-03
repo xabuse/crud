@@ -22,8 +22,6 @@ services:
   phpmyadmin:
     image: phpmyadmin
     restart: always
-    links:
-      - db
     environment:
       PMA_HOST: db
     ports:

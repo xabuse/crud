@@ -1,12 +1,10 @@
 <?php
 
-use JetBrains\PhpStorm\NoReturn;
-
 session_start();
 
 require_once __DIR__ . '/config.php';
 
-#[NoReturn] function redirect(string $path): void
+function redirect(string $path): void
 {
     header("Location: $path");
     die();
@@ -101,7 +99,7 @@ function currentUser(): array|false
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-#[NoReturn] function logout(): void
+function logout(): void
 {
     unset($_SESSION['user']['id']);
     redirect('/');
@@ -110,17 +108,17 @@ function currentUser(): array|false
 // Редирект на главную, когда неавторизированы
 function checkAuth(): void
 {
-//    if (!isset($_SESSION['user']['id'])) {
-//        redirect('/');
-//    }
+    if (!isset($_SESSION['user']['id'])) {
+        redirect('/');
+    }
 }
 
 // Редирект с логина и регистрации, когда авторизированы
 function checkGuest(): void
 {
-//    if (isset($_SESSION['user']['id'])) {
-//        redirect('/home.php');
-//    }
+    if (isset($_SESSION['user']['id'])) {
+        redirect('/home.php');
+    }
 }
 
 // Create db entry with email if not here yet.
@@ -130,7 +128,7 @@ function createFirstTimer(): void
     $email = currentUser()['email'];
     $check = getTimerTime();
 
-    if (empty($check)) {
+    if (empty($check) and $check !== 0) {
         $stmt = $pdo->prepare("
             INSERT INTO timer (email)
             VALUES (:email)
@@ -138,7 +136,6 @@ function createFirstTimer(): void
         $stmt->execute(['email' => $email]);
     }
 }
-
 
 // in timer get timerTime where email==email, if email not in timer: create email and return timerTime where email==email
 function getTimerTime()
@@ -274,7 +271,7 @@ function dataFromDbById($id)
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-function deleteToDoFromDb($id)
+function deleteToDoFromDb($id): void
 {
     $pdo = getPDO();
 
@@ -288,7 +285,7 @@ function deleteToDoFromDb($id)
     $stmt->execute(['id' => $id, 'email' => $email]);
 }
 
-function updateToDoInDb($id, $timeLimit, $description)
+function updateToDoInDb($id, $timeLimit, $description): void
 {
 
     if (isset($timeLimit)) {
